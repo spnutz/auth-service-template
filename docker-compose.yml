@@ -1,0 +1,22 @@
+version: '3'
+services:
+  auth-service:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3001:3001
+    volumes:
+      - ./:/app
+    depends_on:
+      - db
+  db:
+    image: postgres
+    ports:
+      - 5433:5432
+    volumes:
+      - ./.data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=supanat_k
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=auth-service
