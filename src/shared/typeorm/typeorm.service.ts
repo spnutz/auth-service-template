@@ -9,11 +9,11 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
     const db = {
       synchronize: false,
       type: 'postgres',
-      host: this.config.get<string>('database.host'),
-      port: this.config.get<number>('database.port'),
-      username: this.config.get<string>('database.user'),
-      password: this.config.get<string>('database.password'),
-      database: this.config.get<string>('database.name'),
+      host: this.config.get<string>('pg.host'),
+      port: this.config.get<number>('pg.port'),
+      username: this.config.get<string>('pg.user'),
+      password: this.config.get<string>('pg.password'),
+      database: this.config.get<string>('pg.name'),
       extra: {
         connectionLimit: 30,
       },
