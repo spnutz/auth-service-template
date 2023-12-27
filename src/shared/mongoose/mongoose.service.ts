@@ -10,12 +10,13 @@ export class MongooseConfigService implements MongooseOptionsFactory {
   constructor(private config: ConfigService) {}
 
   public createMongooseOptions(): MongooseModuleOptions {
-    const user = this.config.get<string>('database.user');
-    const password = this.config.get<string>('database.password');
-    const name = this.config.get<string>('database.name');
-    const uri = `mongodb+srv://${user}:${password}@${name}.mfllie3.mongodb.net/auth-service`;
+    const user = this.config.get<string>('mongo.user');
+    const password = this.config.get<string>('mongo.password');
+    const dbName = this.config.get<string>('mongo.name');
+    const uri = `mongodb://${user}:${password}@localhost:27017`;
     const db: MongooseModuleOptions = {
       uri,
+      dbName: dbName,
     };
     return db;
   }

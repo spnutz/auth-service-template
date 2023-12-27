@@ -1,22 +1,33 @@
 version: '3'
 services:
-  auth-service:
-    build: 
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - 3001:3001
-    volumes:
-      - ./:/app
-    depends_on:
-      - db
+  # auth-service:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 3001:3001
+  #   volumes:
+  #     - ./:/app
+  #   depends_on:
+  #     - db
   db:
     image: postgres
     ports:
-      - 5433:5432
+      - 5432:5432
     volumes:
       - ./.data/db:/var/lib/postgresql/data
     environment:
-      - POSTGRES_USER=supanat_k
+      - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=auth-service
+  db-mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - ./.data/db:/var/lib/mongo/data
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_DATABASE: auth-service

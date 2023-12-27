@@ -6,7 +6,7 @@ import { TerminusModule } from '@nestjs/terminus';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './modules/auth/auth.module';
 import { DatabaseModule } from './modules/database/database.module';
-import databaseConfig from './config/database.config';
+import { mongo, pg } from './config/database.config';
 import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 import { HttpExceptionFilter } from './common/exceptions/http.exception.filter';
 import { UsersModule } from './modules/users/users.module';
@@ -16,7 +16,7 @@ import { AccessTokenGuard } from './common/guards/access-token.guard';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load: [databaseConfig],
+      load: [mongo, pg],
     }),
     TerminusModule,
     HealthModule,

@@ -15,9 +15,8 @@ import { AccessTokenStrategy } from './strategies/access-token.strategy';
       secret: 'test',
       signOptions: { expiresIn: '60s' },
     }),
-    AccessTokenStrategy,
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, AccessTokenStrategy],
 })
 export class AuthModule {}
